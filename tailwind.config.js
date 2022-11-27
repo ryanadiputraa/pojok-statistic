@@ -5,13 +5,23 @@ module.exports = {
     extend: {
       fontFamily: {
         montserrat: "Montserrat",
-        "montserrat-bold": "Montserrat Bold",
+        montserratBold: "Montserrat Bold",
       },
       colors: {
-        primary: "#1B1B1B",
+        primary: "#0B0B0B",
+        primaryLight: "#323232",
         secondary: "#F2F2F2",
         accent: "#069091",
-        grey: "#EAEAEA",
+        grey: "#878787",
+      },
+      keyframes: {
+        rotate: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(180deg)" },
+        },
+      },
+      animation: {
+        rotate: "rotate 1s ease-in-out",
       },
     },
   },
