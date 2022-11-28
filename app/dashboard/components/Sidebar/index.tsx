@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
 import { RiArrowLeftRightLine } from "react-icons/ri";
 
-import { Page } from "../../page";
+import { Page } from "../../layout";
 
 interface Props {
   isOpen: boolean;
@@ -61,20 +62,22 @@ export default function Sidebar({
         <span className="text-grey mb-1">Menu</span>
         <ul className="w-full">
           {pages.map((item, idx) => (
-            <li
-              key={idx}
-              className={`flex items-center ${
-                !isOpen ? "sm:justify-center sm:py-2" : ""
-              } gap-2 mb-1 px-2 py-1 rounded-md cursor-pointer hover:bg-primaryLight ${
-                selected === item ? "bg-primaryLight font-montserratBold" : ""
-              }`}
-              onClick={() => setSelected(item)}
-            >
-              {item.ico}{" "}
-              <span className={!isOpen ? "inline sm:hidden" : ""}>
-                {item.label}
-              </span>
-            </li>
+            <Link href={item.link}>
+              <li
+                key={idx}
+                className={`flex items-center ${
+                  !isOpen ? "sm:justify-center sm:py-2" : ""
+                } gap-2 mb-1 px-2 py-1 rounded-md cursor-pointer hover:bg-primaryLight ${
+                  selected === item ? "bg-primaryLight font-montserratBold" : ""
+                }`}
+                onClick={() => setSelected(item)}
+              >
+                {item.ico}{" "}
+                <span className={!isOpen ? "inline sm:hidden" : ""}>
+                  {item.label}
+                </span>
+              </li>
+            </Link>
           ))}
         </ul>
       </div>
