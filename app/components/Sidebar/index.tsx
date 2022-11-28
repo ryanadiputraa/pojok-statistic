@@ -3,21 +3,29 @@
 import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import { RiArrowLeftRightLine } from "react-icons/ri";
-import { Page, Pages } from "../../page";
+
+import { Page } from "../../page";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  selected: Pages;
+  selected: Page;
+  setSelected: Dispatch<SetStateAction<Page>>;
   pages: Page[];
 }
 
-export default function Sidebar({ isOpen, setIsOpen, selected, pages }: Props) {
+export default function Sidebar({
+  isOpen,
+  setIsOpen,
+  selected,
+  setSelected,
+  pages,
+}: Props) {
   const [animateRotate, setAnimateRotate] = useState(false);
 
   return (
     <nav
-      className={`transition-all duration-500 bg-primary text-secondary fixed sm:left-0 top-0 min-h-screen flex flex-col gap-6 px-6 py-6 ${
+      className={`transition-all duration-500 bg-primary text-secondary fixed sm:left-0 top-0 min-h-screen flex flex-col gap-6 px-4 py-6 ${
         isOpen
           ? "w-3/4 sm:w-80 left-0 items-start"
           : "w-3/4 sm:w-20 left-[-100%] sm:right-auto items-start sm:items-center"
@@ -55,11 +63,12 @@ export default function Sidebar({ isOpen, setIsOpen, selected, pages }: Props) {
           {pages.map((item, idx) => (
             <li
               key={idx}
-              className={`flex items-center gap-2 mb-1 px-2 py-1 rounded-md cursor-pointer hover:bg-primaryLight ${
-                selected === item.label
-                  ? "bg-primaryLight font-montserratBold"
-                  : ""
+              className={`flex items-center ${
+                !isOpen ? "sm:justify-center sm:py-2" : ""
+              } gap-2 mb-1 px-2 py-1 rounded-md cursor-pointer hover:bg-primaryLight ${
+                selected === item ? "bg-primaryLight font-montserratBold" : ""
               }`}
+              onClick={() => setSelected(item)}
             >
               {item.ico}{" "}
               <span className={!isOpen ? "inline sm:hidden" : ""}>

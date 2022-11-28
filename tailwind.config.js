@@ -10,9 +10,10 @@ module.exports = {
       colors: {
         primary: "#0B0B0B",
         primaryLight: "#323232",
-        secondary: "#F2F2F2",
+        secondary: "#FAFAFA",
         accent: "#069091",
         grey: "#878787",
+        greyLight: "#CECECE",
       },
       keyframes: {
         rotate: {
