@@ -31,7 +31,7 @@ export default function Sidebar({
       }`}
     >
       <div className="flex items-center gap-2">
-        <Image src="/favicon.ico" width={20} height={20} alt="" />
+        <Image src="/favicon.ico" width={20} height={20} alt="" priority />
         <h1
           className={`font-montserratBold text-lg md:text-2xl whitespace-nowrap ${
             !isOpen ? "inline sm:hidden" : ""
@@ -60,9 +60,8 @@ export default function Sidebar({
         <span className="text-grey mb-1">Menu</span>
         <ul className="w-full">
           {pages.map((item, idx) => (
-            <Link href={item.link}>
+            <Link key={idx} href={item.link}>
               <li
-                key={idx}
                 className={`flex items-center ${
                   !isOpen ? "sm:justify-center sm:py-2" : ""
                 } gap-2 mb-1 px-2 py-1 rounded-md cursor-pointer hover:bg-primaryLight ${

@@ -37,27 +37,22 @@ export default function RootLayout({
   const [selectedPage, setSelectedPage] = useState<Page>(pages[0]);
 
   return (
-    <html>
-      <head />
-      <body>
-        <div
-          className={`flex ${
-            isSideBarOpen ? "sm:pl-80" : "sm:pl-20"
-          } transition-all duration-500`}
-        >
-          <Sidebar
-            isOpen={isSideBarOpen}
-            setIsOpen={setIsSidebarOpen}
-            selected={selectedPage}
-            setSelected={setSelectedPage}
-            pages={pages}
-          />
-          <main className="bg-secondary w-screen h-screen px-4 sm:px-10">
-            <Header title={selectedPage} />
-            {children}
-          </main>
-        </div>
-      </body>
-    </html>
+    <div
+      className={`flex ${
+        isSideBarOpen ? "sm:pl-80" : "sm:pl-20"
+      } transition-all duration-500`}
+    >
+      <Sidebar
+        isOpen={isSideBarOpen}
+        setIsOpen={setIsSidebarOpen}
+        selected={selectedPage}
+        setSelected={setSelectedPage}
+        pages={pages}
+      />
+      <main className="bg-secondary w-screen h-screen px-4 sm:px-10">
+        <Header title={selectedPage} />
+        {children}
+      </main>
+    </div>
   );
 }
