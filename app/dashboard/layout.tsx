@@ -6,7 +6,7 @@ import { AiOutlineHome, AiOutlineSetting } from "react-icons/ai";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 
-export enum PageList {
+enum PageList {
   Dashboard = "Dashboard",
   Settings = "Settings",
 }

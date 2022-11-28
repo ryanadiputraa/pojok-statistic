@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -43,7 +41,7 @@ export default function Sidebar({
         </h1>
       </div>
       <button
-        className={`bg-accent text-montserratBold text-secondary w-10 h-10 grid place-items-center p-2 rounded-full self-end relative left-10 shadow-xl ${
+        className={`bg-accent text-montserratBold text-secondary w-10 h-10 grid place-items-center p-2 rounded-full self-end relative left-10 shadow-xl hover:brightness-95 ${
           animateRotate ? "animate-rotate" : ""
         }`}
         onClick={() => {
