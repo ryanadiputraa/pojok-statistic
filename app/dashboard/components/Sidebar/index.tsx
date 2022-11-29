@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
 import { RiArrowLeftRightLine } from "react-icons/ri";
 
-import { Page } from "../../layout";
+import { Page } from "dashboard/layout";
 
 interface Props {
   isOpen: boolean;

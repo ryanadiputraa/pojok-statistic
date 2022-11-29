@@ -1,4 +1,4 @@
-import { Page } from "../../layout";
+import { Page } from "dashboard/layout";
 
 interface Props {
   title: Page;

@@ -3,8 +3,8 @@
 import { ReactElement, useState } from "react";
 import { AiOutlineHome, AiOutlineSetting } from "react-icons/ai";
 
-import Sidebar from "./components/Sidebar";
-import Header from "./components/Header";
+import Sidebar from "dashboard/components/Sidebar";
+import Header from "dashboard/components/Header";
 
 enum PageList {
   Dashboard = "Dashboard",
