@@ -24,7 +24,7 @@ export default function Sidebar({
 
   return (
     <nav
-      className={`transition-all duration-500 bg-primary text-secondary fixed sm:left-0 top-0 min-h-screen flex flex-col gap-6 px-4 py-6 ${
+      className={`z-50 transition-all duration-500 bg-primary text-secondary fixed sm:left-0 top-0 min-h-screen flex flex-col gap-6 px-4 py-6 ${
         isOpen
           ? "w-3/4 sm:w-80 left-0 items-start"
           : "w-3/4 sm:w-20 left-[-100%] sm:right-auto items-start sm:items-center"
@@ -41,7 +41,7 @@ export default function Sidebar({
         </h1>
       </div>
       <button
-        className={`bg-accent text-montserratBold text-secondary w-10 h-10 grid place-items-center p-2 rounded-full self-end relative left-10 shadow-xl hover:brightness-95 ${
+        className={`bg-accent text-montserratBold text-secondary w-10 h-10 grid place-items-center p-2 rounded-full self-end relative left-10 bottom-14 sm:bottom-auto shadow-xl hover:brightness-95 ${
           animateRotate ? "animate-rotate" : ""
         }`}
         onClick={() => {

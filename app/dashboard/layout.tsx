@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { AiOutlineHome, AiOutlineSetting } from "react-icons/ai";
 
 import Sidebar from "dashboard/components/Sidebar";
@@ -31,10 +31,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [isSideBarOpen, setIsSidebarOpen] = useState<boolean>(
-    screen.width >= 640
-  );
+  const [isSideBarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [selectedPage, setSelectedPage] = useState<Page>(pages[0]);
+
+  useEffect(() => {
+    setIsSidebarOpen(window.innerWidth >= 640);
+  }, []);
 
   return (
     <div

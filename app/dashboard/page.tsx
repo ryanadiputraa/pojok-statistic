@@ -31,7 +31,7 @@ export default function Dashboard() {
 
   return (
     <div className="w-full flex flex-col">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mb-4">
         <h4>Analyze your company turnover by using our template!</h4>
         <a className="main-btn" href="template.xlsx" download>
           Download Template

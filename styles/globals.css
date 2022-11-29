@@ -14,7 +14,7 @@
 
 @layer components {
   .main-btn {
-    @apply text-center bg-accent text-secondary p-2 mb-4 rounded-md cursor-pointer font-montserratBold shadow-md hover:brightness-95;
+    @apply text-center bg-accent text-secondary p-2 rounded-md cursor-pointer font-montserratBold shadow-md hover:brightness-95;
   }
 }
 

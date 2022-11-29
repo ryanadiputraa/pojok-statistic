@@ -46,7 +46,7 @@ export default function FileDropzone({
   return (
     <div
       {...getRootProps({
-        className: `cursor-pointer bg-secondary h-80 flex flex-col justify-center items-center ${
+        className: `text-center cursor-pointer bg-secondary h-80 flex flex-col justify-center items-center ${
           onDrag ? "border-accent" : "border-greyLight"
         }  border-4 border-dashed`,
       })}
