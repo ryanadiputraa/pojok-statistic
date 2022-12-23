@@ -3,30 +3,33 @@
 import { useState } from "react";
 
 import FileDropzone from "dashboard/components/Dropzone";
+import SpinLoader from "components/SpinLoader";
 
 export default function Dashboard() {
-  const [file, setFile] = useState<File | null>(null);
   const [isInvalidFormat, setIsInvalidFormat] = useState<boolean>(false);
+  const [onLoading, setOnLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const onAnalyze = async () => {
+  const onAnalyze = async (file: File) => {
+    setError(null);
+    setOnLoading(true);
+
     if (!file) return;
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append("file", file);
 
     try {
-      const resp = await fetch("http://localhost:8080/api/turnover", {
+      const resp = await fetch("http://127.0.0.1:8000/api/turnover", {
         method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
         body: formData,
       });
-      console.log(resp);
+      const json = await resp.json();
+      console.log(json);
     } catch (error) {
       console.error(error);
-      // REMOVE LATER
-      alert("API BELUM JALAN PAK");
+      setError("Something went wrong, please try again later");
     }
+    setOnLoading(false);
   };
 
   return (
@@ -37,20 +40,20 @@ export default function Dashboard() {
           Download Template
         </a>
       </div>
-      <FileDropzone
-        setFile={setFile}
-        isInvalidFormat={isInvalidFormat}
-        setIsInvalidFormat={setIsInvalidFormat}
-      />
-      <button
-        disabled={!file || isInvalidFormat}
-        className={`main-btn self-center mt-2 ${
-          !file || isInvalidFormat ? "grayscale" : ""
-        }`}
-        onClick={onAnalyze}
-      >
-        Analyze
-      </button>
+      <form encType="multipart/form-data" className="flex flex-col">
+        <FileDropzone
+          onAnalyze={onAnalyze}
+          onLoading={onLoading}
+          isInvalidFormat={isInvalidFormat}
+          setIsInvalidFormat={setIsInvalidFormat}
+        />
+      </form>
+      {error && (
+        <span className="self-center mt-2 font-montserratBold text-red-400">
+          {error}
+        </span>
+      )}
+      {onLoading && <SpinLoader />}
     </div>
   );
 }

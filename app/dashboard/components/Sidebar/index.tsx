@@ -26,11 +26,11 @@ export default function Sidebar({
     <nav
       className={`z-50 transition-all duration-500 bg-primary text-secondary fixed sm:left-0 top-0 min-h-screen flex flex-col gap-6 px-4 py-6 ${
         isOpen
-          ? "w-3/4 sm:w-80 left-0 items-start"
+          ? "w-3/4 sm:w-64 left-0 items-start"
           : "w-3/4 sm:w-20 left-[-100%] sm:right-auto items-start sm:items-center"
       }`}
     >
-      <div className="flex items-center gap-2">
+      <Link href="/" className="flex items-center gap-2 cursor-pointer">
         <Image src="/favicon.ico" width={20} height={20} alt="" priority />
         <h1
           className={`font-montserratBold text-lg md:text-2xl whitespace-nowrap ${
@@ -39,9 +39,9 @@ export default function Sidebar({
         >
           Pojok Statistic
         </h1>
-      </div>
+      </Link>
       <button
-        className={`bg-accent text-montserratBold text-secondary w-10 h-10 grid place-items-center p-2 rounded-full self-end relative left-10 bottom-14 sm:bottom-auto shadow-xl hover:brightness-95 ${
+        className={`bg-accent text-montserratBold text-secondary w-10 h-10 grid place-items-center p-2 rounded-full self-end relative left-9 bottom-14 sm:bottom-auto shadow-xl hover:brightness-95 ${
           animateRotate ? "animate-rotate" : ""
         }`}
         onClick={() => {

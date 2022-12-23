@@ -4,7 +4,8 @@ import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { useDropzone, Accept } from "react-dropzone";
 
 interface Props {
-  setFile: Dispatch<SetStateAction<File | null>>;
+  onAnalyze: (file: File) => Promise<void>;
+  onLoading: boolean;
   isInvalidFormat: boolean;
   setIsInvalidFormat: Dispatch<SetStateAction<boolean>>;
 }
@@ -12,7 +13,8 @@ interface Props {
 const acceptedFileExtension = ["xls", "xlsx", "xlsb"];
 
 export default function FileDropzone({
-  setFile,
+  onAnalyze,
+  onLoading,
   isInvalidFormat,
   setIsInvalidFormat,
 }: Props) {
@@ -24,9 +26,9 @@ export default function FileDropzone({
     const fileExt = acceptedFiles[0].name.split(".").pop() ?? "";
     setOnDrag(false);
     if (acceptedFileExtension.includes(fileExt)) {
-      setFile(acceptedFiles[0]);
       setFileName(acceptedFiles[0].name);
       setIsInvalidFormat(false);
+      onAnalyze(acceptedFiles[0]);
     } else {
       setFileName("");
       setIsInvalidFormat(true);
@@ -41,6 +43,7 @@ export default function FileDropzone({
     onDragEnter,
     onDragLeave,
     multiple: false,
+    disabled: onLoading,
   });
 
   return (
@@ -51,9 +54,11 @@ export default function FileDropzone({
         }  border-4 border-dashed`,
       })}
     >
-      <input {...getInputProps()} />
+      <input disabled {...getInputProps()} />
       <span className="italic font-montserratBold">
-        Drag and drop your file or click here to upload
+        {onLoading
+          ? "Uploading... please wait a moment"
+          : "Drag and drop your file or click here to upload"}
       </span>
       {isInvalidFormat && (
         <p className="text-red-500">
