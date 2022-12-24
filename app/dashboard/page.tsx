@@ -4,11 +4,13 @@ import { useState } from "react";
 
 import FileDropzone from "dashboard/components/Dropzone";
 import SpinLoader from "components/SpinLoader";
+import TurnoverBar, { TurnoverData } from "dashboard/components/TurnoverBar";
 
 export default function Dashboard() {
   const [isInvalidFormat, setIsInvalidFormat] = useState<boolean>(false);
   const [onLoading, setOnLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [turnoverData, setTurnoverData] = useState<TurnoverData[] | null>(null);
 
   const onAnalyze = async (file: File) => {
     setError(null);
@@ -24,7 +26,7 @@ export default function Dashboard() {
         body: formData,
       });
       const json = await resp.json();
-      console.log(json);
+      setTurnoverData(json.data?.customer_typetotal ?? null);
     } catch (error) {
       console.error(error);
       setError("Something went wrong, please try again later");
@@ -54,6 +56,7 @@ export default function Dashboard() {
         </span>
       )}
       {onLoading && <SpinLoader />}
+      {turnoverData && <TurnoverBar data={turnoverData} />}
     </div>
   );
 }

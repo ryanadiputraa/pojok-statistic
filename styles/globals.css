@@ -16,6 +16,9 @@
   .main-btn {
     @apply text-center bg-accent text-secondary p-2 rounded-md cursor-pointer font-montserratBold shadow-md hover:brightness-95;
   }
+  .secondary-btn {
+    @apply text-center bg-secondary text-accent p-2 border-solid border-2 border-accent rounded-md cursor-pointer font-montserratBold shadow-md hover:brightness-95;
+  }
 }
 
 html,
@@ -24,6 +27,7 @@ body {
   margin: 0;
   font-family: "montserrat", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #FAFAFA;
 }
 
 a {

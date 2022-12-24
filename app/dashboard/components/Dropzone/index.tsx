@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
-import { useDropzone, Accept } from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 
 interface Props {
   onAnalyze: (file: File) => Promise<void>;

@@ -51,7 +51,7 @@ export default function RootLayout({
         setSelected={setSelectedPage}
         pages={pages}
       />
-      <main className="bg-secondary w-screen h-screen px-4 sm:px-10">
+      <main className="w-screen h-screen px-4 sm:px-10">
         <Header title={selectedPage} />
         {children}
       </main>
