@@ -30,15 +30,8 @@ export default function Sidebar({
           : "w-3/4 sm:w-20 left-[-100%] sm:right-auto items-start sm:items-center"
       }`}
     >
-      <Link href="/" className="flex items-center gap-2 cursor-pointer">
-        <Image src="/favicon.ico" width={20} height={20} alt="" priority />
-        <h1
-          className={`font-montserratBold text-lg md:text-2xl whitespace-nowrap ${
-            !isOpen ? "inline sm:hidden" : ""
-          }`}
-        >
-          Pojok Statistic
-        </h1>
+      <Link href="/" className="self-center flex items-center cursor-pointer">
+        <Image src="/logo.png" width={200} height={20} alt="" priority />
       </Link>
       <button
         className={`bg-accent text-montserratBold text-secondary w-10 h-10 grid place-items-center p-2 rounded-full self-end relative left-9 bottom-14 sm:bottom-auto shadow-xl hover:brightness-95 ${

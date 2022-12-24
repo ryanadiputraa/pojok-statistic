@@ -13,6 +13,7 @@ export default function Dashboard() {
   const [turnoverData, setTurnoverData] = useState<TurnoverData[] | null>(null);
 
   const onAnalyze = async (file: File) => {
+    setTurnoverData(null);
     setError(null);
     setOnLoading(true);
 
