@@ -5,15 +5,15 @@ module.exports = {
     extend: {
       fontFamily: {
         montserrat: "Montserrat",
-        montserratBold: "Montserrat Bold",
+        "montserrat-bold": "Montserrat Bold",
       },
       colors: {
         primary: "#0B0B0B",
-        primaryLight: "#323232",
+        "primary-light": "#323232",
         secondary: "#FAFAFA",
         accent: "#069091",
         grey: "#878787",
-        greyLight: "#CECECE",
+        "grey-light": "#CECECE",
       },
       keyframes: {
         rotate: {
@@ -23,6 +23,9 @@ module.exports = {
       },
       animation: {
         rotate: "rotate 1s ease-in-out",
+      },
+      gridTemplateColumns: {
+        "auto-fill": "repeat(auto-fill, minmax(160px, 1fr))",
       },
     },
   },

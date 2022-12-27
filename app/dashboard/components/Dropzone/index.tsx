@@ -50,20 +50,20 @@ export default function FileDropzone({
     <div
       {...getRootProps({
         className: `text-center cursor-pointer bg-secondary h-80 flex flex-col justify-center items-center ${
-          onDrag ? "border-accent" : "border-greyLight"
+          onDrag ? "border-accent" : "border-grey-light"
         }  border-4 border-dashed`,
       })}
     >
       <input disabled {...getInputProps()} />
-      <span className="italic font-montserratBold">
+      <span className="italic font-montserrat-bold">
         {onLoading
-          ? "Uploading... please wait a moment"
+          ? "Analyzing... please wait a moment, this may take a while"
           : "Drag and drop your file or click here to upload"}
       </span>
       {isInvalidFormat && (
         <p className="text-red-500">
           Please use valid file format, you can use our template by clicking
-          <span className="font-montserratBold"> "Download Template" </span>
+          <span className="font-montserrat-bold"> "Download Template" </span>
           button above
         </p>
       )}

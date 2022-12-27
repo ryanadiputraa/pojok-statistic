@@ -31,10 +31,18 @@ export default function Sidebar({
       }`}
     >
       <Link href="/" className="self-center flex items-center cursor-pointer">
-        <Image src="/logo.png" width={200} height={20} alt="" priority />
+        <Image
+          src="/logo.png"
+          width="0"
+          height="0"
+          sizes="100vw"
+          className="w-full h-auto px-2"
+          alt=""
+          priority
+        />
       </Link>
       <button
-        className={`bg-accent text-montserratBold text-secondary w-10 h-10 grid place-items-center p-2 rounded-full self-end relative left-9 bottom-14 sm:bottom-auto shadow-xl hover:brightness-95 ${
+        className={`bg-accent text-montserrat-bold text-secondary w-10 h-10 grid place-items-center p-2 rounded-full self-end relative left-9 bottom-14 sm:bottom-auto shadow-xl hover:brightness-95 ${
           animateRotate ? "animate-rotate" : ""
         }`}
         onClick={() => {
@@ -57,8 +65,10 @@ export default function Sidebar({
               <li
                 className={`flex items-center ${
                   !isOpen ? "sm:justify-center sm:py-2" : ""
-                } gap-2 mb-1 px-2 py-1 rounded-md cursor-pointer hover:bg-primaryLight ${
-                  selected === item ? "bg-primaryLight font-montserratBold" : ""
+                } gap-2 mb-1 px-2 py-1 rounded-md cursor-pointer hover:bg-primary-light ${
+                  selected === item
+                    ? "bg-primary-light font-montserrat-bold"
+                    : ""
                 }`}
                 onClick={() => setSelected(item)}
               >

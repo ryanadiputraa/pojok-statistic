@@ -13,11 +13,14 @@
 }
 
 @layer components {
+  .btn {
+    @apply text-center p-2 border-2 border-solid rounded-md cursor-pointer font-montserrat-bold shadow-md;
+  }
   .main-btn {
-    @apply text-center bg-accent text-secondary p-2 rounded-md cursor-pointer font-montserratBold shadow-md hover:brightness-95;
+    @apply btn bg-accent text-secondary border-transparent hover:brightness-95;
   }
   .secondary-btn {
-    @apply text-center bg-secondary text-accent p-2 border-solid border-2 border-accent rounded-md cursor-pointer font-montserratBold shadow-md hover:brightness-95;
+    @apply btn bg-secondary text-accent border-accent hover:brightness-95;
   }
 }
 
@@ -25,9 +28,9 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "montserrat", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: #FAFAFA;
+  font-family: "montserrat", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #fafafa;
 }
 
 a {

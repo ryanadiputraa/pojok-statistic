@@ -50,16 +50,16 @@ const CustomTooltip = ({
   );
 };
 
-export interface TurnoverData {
+export interface TurnoverGraphData {
   label: string;
   data: number;
 }
 
 interface Props {
-  data: TurnoverData[];
+  data: TurnoverGraphData[];
 }
 
-export default function TurnoverBar({ data }: Props) {
+export default function TurnoverGraph({ data }: Props) {
   const [useCurrency, setUseCurrency] = useState<boolean>(false);
 
   const formatYLabel = (value: number) => {
@@ -87,11 +87,7 @@ export default function TurnoverBar({ data }: Props) {
       </ResponsiveContainer>
       <button
         onClick={() => setUseCurrency(!useCurrency)}
-        className={`${
-          useCurrency
-            ? "main-btn border-2 border-solid border-transparent"
-            : "secondary-btn"
-        } text-xs`}
+        className={`${useCurrency ? "main-btn" : "secondary-btn"} text-xs`}
       >
         Use Rupiah
       </button>
