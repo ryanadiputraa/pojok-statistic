@@ -1,31 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useContext, useState } from "react";
 import { RiArrowLeftRightLine } from "react-icons/ri";
 
-import { Page } from "dashboard/layout";
+import { AppContext } from "context";
 
-interface Props {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  selected: Page;
-  setSelected: Dispatch<SetStateAction<Page>>;
-  pages: Page[];
-}
-
-export default function Sidebar({
-  isOpen,
-  setIsOpen,
-  selected,
-  setSelected,
-  pages,
-}: Props) {
+export default function Sidebar() {
+  const { main, mainDispatch } = useContext(AppContext);
   const [animateRotate, setAnimateRotate] = useState(false);
 
   return (
     <nav
       className={`z-50 transition-all duration-500 bg-primary text-secondary fixed sm:left-0 top-0 min-h-screen flex flex-col gap-6 px-4 py-6 ${
-        isOpen
+        main.isSidebarOpen
           ? "w-3/4 sm:w-64 left-0 items-start"
           : "w-3/4 sm:w-20 left-[-100%] sm:right-auto items-start sm:items-center"
       }`}
@@ -46,7 +33,7 @@ export default function Sidebar({
           animateRotate ? "animate-rotate" : ""
         }`}
         onClick={() => {
-          setIsOpen(!isOpen);
+          mainDispatch({ type: "TOGGLE_SIDEBAR" });
           setAnimateRotate(true);
         }}
         onAnimationEnd={() => setAnimateRotate(false)}
@@ -55,26 +42,31 @@ export default function Sidebar({
       </button>
       <div
         className={`flex flex-col ${
-          isOpen ? "items-start" : "items-start sm:items-center"
+          main.isSidebarOpen ? "items-start" : "items-start sm:items-center"
         } w-full text-md`}
       >
         <span className="text-grey mb-1">Menu</span>
         <ul className="w-full">
-          {pages.map((item, idx) => (
-            <Link key={idx} href={item.link}>
+          {main.dashboardPages.map((page, idx) => (
+            <Link key={idx} href={page.link}>
               <li
                 className={`flex items-center ${
-                  !isOpen ? "sm:justify-center sm:py-2" : ""
+                  !main.isSidebarOpen ? "sm:justify-center sm:py-2" : ""
                 } gap-2 mb-1 px-2 py-1 rounded-md cursor-pointer hover:bg-primary-light ${
-                  selected === item
+                  main.activeDashboardPage === page
                     ? "bg-primary-light font-montserrat-bold"
                     : ""
                 }`}
-                onClick={() => setSelected(item)}
+                onClick={() =>
+                  mainDispatch({
+                    type: "SET_ACTIVE_DASHBOARD_PAGE",
+                    payload: page,
+                  })
+                }
               >
-                {item.ico}{" "}
-                <span className={!isOpen ? "inline sm:hidden" : ""}>
-                  {item.label}
+                {page.ico}{" "}
+                <span className={!main.isSidebarOpen ? "inline sm:hidden" : ""}>
+                  {page.label}
                 </span>
               </li>
             </Link>

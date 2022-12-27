@@ -1,31 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useContext } from "react";
 
+import { AppContext } from "context";
+import { TurnoverGraphData } from "context/reducers/turnover";
 import FileDropzone from "dashboard/components/Dropzone";
 import SpinLoader from "components/SpinLoader";
-import TurnoverGraph, {
-  TurnoverGraphData,
-} from "dashboard/components/TurnoverGraph";
-import TurnoverCategories from "./components/TurnoverCategories";
-
-export interface TurnoverData {
-  [key: string]: TurnoverGraphData[];
-}
+import TurnoverGraph from "dashboard/components/TurnoverGraph";
+import TurnoverCategories from "dashboard/components/TurnoverCategories";
 
 export default function Dashboard() {
-  const [isInvalidFormat, setIsInvalidFormat] = useState<boolean>(false);
-  const [onLoading, setOnLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const [turnoverData, setTurnoverData] = useState<TurnoverData | null>(null);
-  const [turnoverGraphData, setTurnoverGraphData] = useState<
-    TurnoverGraphData[] | null
-  >(null);
+  const { turnover, turnoverDispatch } = useContext(AppContext);
 
-  const onAnalyze = async (file: File) => {
-    setTurnoverGraphData(null);
-    setError(null);
-    setOnLoading(true);
+  const onSubmit = async (file: File) => {
+    turnoverDispatch({ type: "SET_TURNOVER_GRAPH_DATA", payload: null });
+    turnoverDispatch({ type: "SET_TURNOVER_ERROR_MESSAGE", message: null });
+    turnoverDispatch({ type: "SET_TURNOVER_LOADING", status: true });
 
     if (!file) return;
     let formData = new FormData();
@@ -41,15 +31,21 @@ export default function Dashboard() {
       );
       const json = await resp.json();
 
-      setTurnoverData(json.data);
+      turnoverDispatch({ type: "SET_TURNOVER_DATA", payload: json.data });
       // set first entry as default data
       const [turnover] = Object.keys(json.data);
-      setTurnoverGraphData(json.data[turnover] ?? null);
+      turnoverDispatch({
+        type: "SET_TURNOVER_GRAPH_DATA",
+        payload: json.data[turnover] ?? null,
+      });
     } catch (error) {
       console.error(error);
-      setError("Something went wrong, please try again later");
+      turnoverDispatch({
+        type: "SET_TURNOVER_ERROR_MESSAGE",
+        message: "Something went wrong, please try again later",
+      });
     }
-    setOnLoading(false);
+    turnoverDispatch({ type: "SET_TURNOVER_LOADING", status: false });
   };
 
   return (
@@ -62,26 +58,33 @@ export default function Dashboard() {
       </div>
       <form encType="multipart/form-data" className="flex flex-col">
         <FileDropzone
-          onAnalyze={onAnalyze}
-          onLoading={onLoading}
-          isInvalidFormat={isInvalidFormat}
-          setIsInvalidFormat={setIsInvalidFormat}
+          onSubmit={onSubmit}
+          isLoading={turnover.isLoading}
+          isInvalidFormat={turnover.isInvalidFormat}
+          setIsInvalidFormat={(status: boolean) =>
+            turnoverDispatch({
+              type: "SET_INVALID_TURNOVER_PAYLOAD",
+              status: status,
+            })
+          }
         />
       </form>
-      {error && (
+      {turnover.errorMessage && (
         <span className="self-center mt-2 font-montserrat-bold text-red-400">
-          {error}
+          {turnover.errorMessage}
         </span>
       )}
-      {onLoading && <SpinLoader />}
-      {turnoverData && (
+      {turnover.isLoading && <SpinLoader />}
+      {turnover.turnoverData && (
         <TurnoverCategories
-          categories={turnoverData}
-          activeCategory={turnoverGraphData}
-          setActiveCategories={setTurnoverGraphData}
+          categories={turnover.turnoverData}
+          selectedGraph={turnover.turnoverGraphData}
+          selectGraph={(data: TurnoverGraphData[]) =>
+            turnoverDispatch({ type: "SET_TURNOVER_GRAPH_DATA", payload: data })
+          }
         />
       )}
-      {turnoverGraphData && <TurnoverGraph data={turnoverGraphData} />}
+      {turnover.turnoverGraphData && <TurnoverGraph />}
     </div>
   );
 }

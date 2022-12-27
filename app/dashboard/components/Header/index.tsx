@@ -1,4 +1,4 @@
-import { Page } from "dashboard/layout";
+import { Page } from "context/reducers/main";
 
 interface Props {
   title: Page;

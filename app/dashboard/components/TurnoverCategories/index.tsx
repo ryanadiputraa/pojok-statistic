@@ -1,18 +1,15 @@
-import { Dispatch, SetStateAction } from "react";
-
-import { TurnoverData } from "dashboard/page";
-import { TurnoverGraphData } from "dashboard/components/TurnoverGraph";
+import { TurnoverData, TurnoverGraphData } from "context/reducers/turnover";
 
 interface Props {
   categories: TurnoverData;
-  activeCategory: TurnoverGraphData[] | null;
-  setActiveCategories: Dispatch<SetStateAction<TurnoverGraphData[] | null>>;
+  selectedGraph: TurnoverGraphData[] | null;
+  selectGraph: (data: TurnoverGraphData[]) => void;
 }
 
 export default function TurnoverCategories({
   categories,
-  activeCategory,
-  setActiveCategories,
+  selectedGraph,
+  selectGraph,
 }: Props) {
   return (
     <li className="grid gap-2 grid-cols-auto-fill my-6">
@@ -20,9 +17,9 @@ export default function TurnoverCategories({
         <ul
           key={category}
           className={`${
-            activeCategory === categories[category] ? "main" : "secondary"
-          }-btn capitalize text-xs`}
-          onClick={() => setActiveCategories(categories[category])}
+            selectedGraph === categories[category] ? "main" : "secondary"
+          }-btn capitalize text-xs rounded-3xl`}
+          onClick={() => selectGraph(categories[category])}
         >
           {category.split("_").join(" ")}
         </ul>

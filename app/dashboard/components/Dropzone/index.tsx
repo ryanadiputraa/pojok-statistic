@@ -1,25 +1,24 @@
 "use client";
 
-import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 interface Props {
-  onAnalyze: (file: File) => Promise<void>;
-  onLoading: boolean;
+  onSubmit: (file: File) => Promise<void>;
+  isLoading: boolean;
   isInvalidFormat: boolean;
-  setIsInvalidFormat: Dispatch<SetStateAction<boolean>>;
+  setIsInvalidFormat: (status: boolean) => void;
 }
 
 const acceptedFileExtension = ["xls", "xlsx", "xlsb"];
 
 export default function FileDropzone({
-  onAnalyze,
-  onLoading,
+  onSubmit,
+  isLoading,
   isInvalidFormat,
   setIsInvalidFormat,
 }: Props) {
   const [fileName, setFileName] = useState<string>("");
-
   const [onDrag, setOnDrag] = useState<boolean>(false);
 
   const onDrop = useCallback(<T extends File>(acceptedFiles: T[]) => {
@@ -28,7 +27,7 @@ export default function FileDropzone({
     if (acceptedFileExtension.includes(fileExt)) {
       setFileName(acceptedFiles[0].name);
       setIsInvalidFormat(false);
-      onAnalyze(acceptedFiles[0]);
+      onSubmit(acceptedFiles[0]);
     } else {
       setFileName("");
       setIsInvalidFormat(true);
@@ -43,7 +42,7 @@ export default function FileDropzone({
     onDragEnter,
     onDragLeave,
     multiple: false,
-    disabled: onLoading,
+    disabled: isLoading,
   });
 
   return (
@@ -56,7 +55,7 @@ export default function FileDropzone({
     >
       <input disabled {...getInputProps()} />
       <span className="italic font-montserrat-bold">
-        {onLoading
+        {isLoading
           ? "Analyzing... please wait a moment, this may take a while"
           : "Drag and drop your file or click here to upload"}
       </span>
