@@ -22,7 +22,7 @@ export default function Dashboard() {
     formData.append("file", file);
 
     try {
-      const resp = await fetch("https://makudonaro.pythonanywhere.com/api/turnover", {
+      const resp = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}api/turnover`, {
         method: "POST",
         body: formData,
       });
