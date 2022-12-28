@@ -16,8 +16,8 @@ export default function RootLayout({
   return (
     <div
       className={`flex ${
-        main.isSidebarOpen ? "sm:pl-64" : "sm:pl-20"
-      } transition-all duration-500`}
+        main.isSidebarOpen ? "sm:pl-64" : "sm:pl-16"
+      } transition-all duration-300`}
     >
       <Sidebar />
       <main className="w-screen h-screen px-4 sm:px-10">

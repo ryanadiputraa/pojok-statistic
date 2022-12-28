@@ -1,6 +1,6 @@
 export const turnoverReducer = (
-  state: TurnoverState,
-  action: TurnoverActions
+  state: ITurnoverState,
+  action: ITurnoverActions
 ) => {
   switch (action.type) {
     case "SET_TURNOVER_GRAPH_DATA":
@@ -38,26 +38,26 @@ export const turnoverReducer = (
   }
 };
 
-export interface TurnoverState {
-  turnoverGraphData: TurnoverGraphData[] | null;
-  turnoverData: TurnoverData | null;
+export interface ITurnoverState {
+  turnoverGraphData: ITurnoverGraphData[] | null;
+  turnoverData: ITurnoverData | null;
   isLoading: boolean;
   isInvalidFormat: boolean;
   errorMessage: string | null;
 }
 
-export type TurnoverActions =
-  | { type: "SET_TURNOVER_GRAPH_DATA"; payload: TurnoverGraphData[] | null }
-  | { type: "SET_TURNOVER_DATA"; payload: TurnoverData | null }
+export type ITurnoverActions =
+  | { type: "SET_TURNOVER_GRAPH_DATA"; payload: ITurnoverGraphData[] | null }
+  | { type: "SET_TURNOVER_DATA"; payload: ITurnoverData | null }
   | { type: "SET_TURNOVER_LOADING"; status: boolean }
   | { type: "SET_INVALID_TURNOVER_PAYLOAD"; status: boolean }
   | { type: "SET_TURNOVER_ERROR_MESSAGE"; message: string | null };
 
-export interface TurnoverData {
-  [key: string]: TurnoverGraphData[];
+export interface ITurnoverData {
+  [key: string]: ITurnoverGraphData[];
 }
 
-export interface TurnoverGraphData {
+export interface ITurnoverGraphData {
   label: string;
   data: number;
 }

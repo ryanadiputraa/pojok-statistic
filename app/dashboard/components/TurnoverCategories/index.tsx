@@ -1,9 +1,9 @@
-import { TurnoverData, TurnoverGraphData } from "context/reducers/turnover";
+import { ITurnoverData, ITurnoverGraphData } from "context/reducers/turnover";
 
 interface Props {
-  categories: TurnoverData;
-  selectedGraph: TurnoverGraphData[] | null;
-  selectGraph: (data: TurnoverGraphData[]) => void;
+  categories: ITurnoverData;
+  selectedGraph: ITurnoverGraphData[] | null;
+  selectGraph: (data: ITurnoverGraphData[]) => void;
 }
 
 export default function TurnoverCategories({

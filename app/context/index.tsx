@@ -2,21 +2,16 @@
 
 import React, { createContext, Dispatch, useReducer } from "react";
 import { AiOutlineHome, AiOutlineSetting } from "react-icons/ai";
+import { IMainActions, mainReducer, IMainState } from "./reducers/main";
 import {
-  DashboardPageList,
-  MainActions,
-  mainReducer,
-  MainState,
-} from "./reducers/main";
-import {
-  TurnoverActions,
+  ITurnoverActions,
   turnoverReducer,
-  TurnoverState,
+  ITurnoverState,
 } from "./reducers/turnover";
 
 type InitialStateType = {
-  main: MainState;
-  turnover: TurnoverState;
+  main: IMainState;
+  turnover: ITurnoverState;
 };
 
 const initialState: InitialStateType = {
@@ -24,18 +19,13 @@ const initialState: InitialStateType = {
     isSidebarOpen: false,
     dashboardPages: [
       {
-        label: DashboardPageList.Dashboard,
+        label: "Dashboard",
         ico: <AiOutlineHome />,
         link: "/dashboard",
       },
-      {
-        label: DashboardPageList.Settings,
-        ico: <AiOutlineSetting />,
-        link: "/dashboard/settings",
-      },
     ],
     activeDashboardPage: {
-      label: DashboardPageList.Dashboard,
+      label: "Dashboard",
       ico: <AiOutlineHome />,
       link: "/dashboard",
     },
@@ -50,10 +40,10 @@ const initialState: InitialStateType = {
 };
 
 const AppContext = createContext<{
-  main: MainState;
-  turnover: TurnoverState;
-  mainDispatch: Dispatch<MainActions>;
-  turnoverDispatch: Dispatch<TurnoverActions>;
+  main: IMainState;
+  turnover: ITurnoverState;
+  mainDispatch: Dispatch<IMainActions>;
+  turnoverDispatch: Dispatch<ITurnoverActions>;
 }>({
   main: initialState.main,
   turnover: initialState.turnover,
@@ -63,11 +53,11 @@ const AppContext = createContext<{
 
 const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [mainState, mainDispatch] = useReducer(
-    (main: MainState, actions: MainActions) => mainReducer(main, actions),
+    (main: IMainState, actions: IMainActions) => mainReducer(main, actions),
     initialState.main
   );
   const [turnoverState, turnoverDispatch] = useReducer(
-    (turnover: TurnoverState, actions: TurnoverActions) =>
+    (turnover: ITurnoverState, actions: ITurnoverActions) =>
       turnoverReducer(turnover, actions),
     initialState.turnover
   );

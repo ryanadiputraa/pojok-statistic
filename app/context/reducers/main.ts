@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-export const mainReducer = (state: MainState, action: MainActions) => {
+export const mainReducer = (state: IMainState, action: IMainActions) => {
   switch (action.type) {
     case "TOGGLE_SIDEBAR":
       return {
@@ -19,22 +19,19 @@ export const mainReducer = (state: MainState, action: MainActions) => {
   }
 };
 
-export interface MainState {
+export interface IMainState {
   isSidebarOpen: boolean;
-  dashboardPages: Page[];
-  activeDashboardPage: Page;
+  dashboardPages: IPage[];
+  activeDashboardPage: IPage;
 }
 
-export type MainActions =
+export type IMainActions =
   | { type: "TOGGLE_SIDEBAR" }
-  | { type: "SET_ACTIVE_DASHBOARD_PAGE"; payload: Page };
+  | { type: "SET_ACTIVE_DASHBOARD_PAGE"; payload: IPage };
 
-export enum DashboardPageList {
-  Dashboard = "Dashboard",
-  Settings = "Settings",
-}
+export type DashboardPageList = "Dashboard" | "Settings";
 
-export interface Page {
+export interface IPage {
   label: DashboardPageList;
   ico: ReactElement;
   link: string;
