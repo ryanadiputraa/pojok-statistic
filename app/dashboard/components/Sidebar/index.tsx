@@ -11,11 +11,8 @@ export default function Sidebar() {
   const { main, mainDispatch } = useContext(AppContext);
   const [animateRotate, setAnimateRotate] = useState(false);
 
-  const MenuBtn: React.FC<{ page: IPage; keyProp?: string }> = ({
-    page,
-    keyProp,
-  }) => (
-    <Link key={keyProp ?? ""} href={page.link}>
+  const MenuBtn: React.FC<{ page: IPage }> = ({ page }) => (
+    <Link href={page.link}>
       <li
         className={`flex items-center text-xl gap-2 px-2 py-1 rounded-md cursor-pointer hover:bg-primary-light ${
           !main.isSidebarOpen ? "sm:justify-center sm:py-2" : ""
