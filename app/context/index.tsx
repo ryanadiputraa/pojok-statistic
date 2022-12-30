@@ -1,17 +1,17 @@
 "use client";
 
 import React, { createContext, Dispatch, useReducer } from "react";
-import { AiOutlineHome, AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
 import { IMainActions, mainReducer, IMainState } from "./reducers/main";
 import {
-  ITurnoverActions,
-  turnoverReducer,
-  ITurnoverState,
-} from "./reducers/turnover";
+  IPerformanceActions,
+  performanceReducer,
+  IPerformanceState,
+} from "./reducers/performance";
 
 type InitialStateType = {
   main: IMainState;
-  turnover: ITurnoverState;
+  performance: IPerformanceState;
 };
 
 const initialState: InitialStateType = {
@@ -30,9 +30,9 @@ const initialState: InitialStateType = {
       link: "/dashboard",
     },
   },
-  turnover: {
-    turnoverGraphData: null,
-    turnoverData: null,
+  performance: {
+    performanceGraphData: null,
+    performanceData: null,
     isLoading: false,
     isInvalidFormat: false,
     errorMessage: null,
@@ -41,14 +41,14 @@ const initialState: InitialStateType = {
 
 const AppContext = createContext<{
   main: IMainState;
-  turnover: ITurnoverState;
+  performance: IPerformanceState;
   mainDispatch: Dispatch<IMainActions>;
-  turnoverDispatch: Dispatch<ITurnoverActions>;
+  performanceDispatch: Dispatch<IPerformanceActions>;
 }>({
   main: initialState.main,
-  turnover: initialState.turnover,
+  performance: initialState.performance,
   mainDispatch: () => null,
-  turnoverDispatch: () => null,
+  performanceDispatch: () => null,
 });
 
 const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -56,19 +56,19 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     (main: IMainState, actions: IMainActions) => mainReducer(main, actions),
     initialState.main
   );
-  const [turnoverState, turnoverDispatch] = useReducer(
-    (turnover: ITurnoverState, actions: ITurnoverActions) =>
-      turnoverReducer(turnover, actions),
-    initialState.turnover
+  const [performanceState, performanceDispatch] = useReducer(
+    (performance: IPerformanceState, actions: IPerformanceActions) =>
+      performanceReducer(performance, actions),
+    initialState.performance
   );
 
   return (
     <AppContext.Provider
       value={{
         main: mainState,
-        turnover: turnoverState,
+        performance: performanceState,
         mainDispatch,
-        turnoverDispatch,
+        performanceDispatch,
       }}
     >
       {children}
