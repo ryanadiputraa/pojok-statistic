@@ -9,6 +9,12 @@ export const performanceReducer = (
         performanceGraphData: action.payload,
       };
 
+    case "TOGGLE_USE_CURRENCY":
+      return {
+        ...state,
+        isUseCurrency: !state.isUseCurrency,
+      };
+
     case "SET_PERFORMANCE_DATA":
       return {
         ...state,
@@ -40,6 +46,7 @@ export const performanceReducer = (
 
 export interface IPerformanceState {
   performanceGraphData: IPerformanceGraphData[] | null;
+  isUseCurrency: boolean;
   performanceData: IPerformanceData | null;
   isLoading: boolean;
   isInvalidFormat: boolean;
@@ -51,6 +58,7 @@ export type IPerformanceActions =
       type: "SET_PERFORMANCE_GRAPH_DATA";
       payload: IPerformanceGraphData[] | null;
     }
+  | { type: "TOGGLE_USE_CURRENCY" }
   | { type: "SET_PERFORMANCE_DATA"; payload: IPerformanceData | null }
   | { type: "SET_PERFORMANCE_LOADING"; status: boolean }
   | { type: "SET_INVALID_PERFORMANCE_PAYLOAD"; status: boolean }

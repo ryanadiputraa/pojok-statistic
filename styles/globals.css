@@ -14,7 +14,7 @@
 
 @layer components {
   .btn {
-    @apply text-center p-2 border-2 border-solid rounded-md cursor-pointer font-montserrat-bold shadow-md;
+    @apply text-center p-2 border-2 border-solid rounded-md cursor-pointer font-montserrat-bold shadow-md focus:outline-none;
   }
   .main-btn {
     @apply btn bg-accent text-secondary border-transparent hover:brightness-95;

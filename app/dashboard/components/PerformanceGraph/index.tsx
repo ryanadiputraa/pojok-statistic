@@ -68,44 +68,35 @@ const CustomTooltip = ({
 
 export default function PerformanceGraph() {
   const { performance } = useContext(AppContext);
-  const [useCurrency, setUseCurrency] = useState<boolean>(true);
 
   const formatYLabel = (value: number) => {
-    if (!useCurrency) return value.toString();
+    if (!performance.isUseCurrency) return value.toString();
     return value.toLocaleString("id-ID", currencyOption);
   };
 
-  console.log(performance.performanceGraphData);
-
   return (
-    <div className="flex justify-between items-start py-4">
-      <ResponsiveContainer width={"90%"} height={300}>
-        <ComposedChart
-          margin={{ left: 24 }}
-          data={performance.performanceGraphData ?? []}
-        >
-          <XAxis dataKey={"label"} />
-          <YAxis tick={{ fontSize: 11 }} tickFormatter={formatYLabel} />
-          <Tooltip content={<CustomTooltip useCurrency={useCurrency} />} />
-          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-          <Bar dataKey={"current"}>
-            {performance.performanceGraphData?.map((_, idx) => (
-              <Cell key={`cell-${idx}`} fill={barPallete[idx % 4]} />
-            ))}
-          </Bar>
-          <Scatter
-            dataKey={"average"}
-            data={performance.performanceGraphData ?? []}
-            fill="#F29393"
-          />
-        </ComposedChart>
-      </ResponsiveContainer>
-      <button
-        onClick={() => setUseCurrency(!useCurrency)}
-        className={`${useCurrency ? "main-btn" : "secondary-btn"} text-xs`}
+    <ResponsiveContainer width={"100%"} height={300}>
+      <ComposedChart
+        margin={{ left: 24 }}
+        data={performance.performanceGraphData ?? []}
       >
-        Currency
-      </button>
-    </div>
+        <XAxis dataKey={"label"} />
+        <YAxis tick={{ fontSize: 10 }} tickFormatter={formatYLabel} />
+        <Tooltip
+          content={<CustomTooltip useCurrency={performance.isUseCurrency} />}
+        />
+        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+        <Bar dataKey={"current"}>
+          {performance.performanceGraphData?.map((_, idx) => (
+            <Cell key={`cell-${idx}`} fill={barPallete[idx % 4]} />
+          ))}
+        </Bar>
+        <Scatter
+          dataKey={"average"}
+          data={performance.performanceGraphData ?? []}
+          fill="#F29393"
+        />
+      </ComposedChart>
+    </ResponsiveContainer>
   );
 }
