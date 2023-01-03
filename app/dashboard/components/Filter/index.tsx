@@ -13,11 +13,13 @@ export default function Filter() {
         onChange={(e) =>
           performanceDispatch({
             type: "SET_PERFORMANCE_GRAPH_DATA",
-            payload: performance.performanceData?.[e.target.value] ?? null,
+            payload:
+              performance.performanceData?.performance?.[e.target.value] ??
+              null,
           })
         }
       >
-        {Object.keys(performance.performanceData).map((key) => (
+        {Object.keys(performance.performanceData.performance).map((key) => (
           <option key={key} value={key}>
             {key.replace("-", " - ")}
           </option>

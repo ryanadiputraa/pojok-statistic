@@ -32,6 +32,7 @@ const initialState: InitialStateType = {
   },
   performance: {
     performanceGraphData: null,
+    performanceSummary: null,
     isUseCurrency: true,
     performanceData: null,
     isLoading: false,

@@ -52,7 +52,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col pb-4">
       <div className="flex justify-between items-center mb-3">
         <h4>Analyze your company performance by using our template!</h4>
         <a className="main-btn text-xs" href="template.xlsx" download>
