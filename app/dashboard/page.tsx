@@ -6,7 +6,6 @@ import { AppContext } from "context";
 import FileDropzone from "dashboard/components/Dropzone";
 import SpinLoader from "components/SpinLoader";
 import PerformanceGraph from "dashboard/components/PerformanceGraph";
-import Filter from "dashboard/components/Filter";
 
 export default function Dashboard() {
   const { performance, performanceDispatch } = useContext(AppContext);
@@ -32,13 +31,13 @@ export default function Dashboard() {
         }
       );
       const json = await resp.json();
-      const dataKeys = Object.keys(json.data);
+      const dataKeys = Object.keys(json.data?.performance);
       // set first entry as default data
       const firstDataKey = dataKeys[0];
 
       performanceDispatch({
         type: "SET_PERFORMANCE_GRAPH_DATA",
-        payload: json.data[firstDataKey] ?? null,
+        payload: json.data?.performance?.[firstDataKey] ?? null,
       });
       performanceDispatch({ type: "SET_PERFORMANCE_DATA", payload: json.data });
     } catch (error) {
@@ -78,7 +77,6 @@ export default function Dashboard() {
         </span>
       )}
       {performance.isLoading && <SpinLoader />}
-      <Filter />
       {performance.performanceGraphData && <PerformanceGraph />}
     </div>
   );

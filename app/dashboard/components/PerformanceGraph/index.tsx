@@ -20,6 +20,7 @@ import {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
+import Filter from "dashboard/components/Filter";
 
 const BAR_PALLET = [
   "#576F72",
@@ -94,6 +95,7 @@ export default function PerformanceGraph() {
 
   return (
     <div ref={ref}>
+      <Filter />
       <ResponsiveContainer width={"100%"} height={300}>
         <ComposedChart
           margin={{ left: 24 }}
@@ -129,11 +131,20 @@ export default function PerformanceGraph() {
             Total:{" "}
             <span className="text-accent font-montserrat-bold">
               {performance.isUseCurrency
-                ? Number(performance.performanceSummary?.total).toLocaleString(
-                    "id-ID",
-                    CURRENCY_OPTION
-                  )
-                : performance.performanceSummary?.total}
+                ? Number(
+                    performance.performanceData?.summary?.total
+                  ).toLocaleString("id-ID", CURRENCY_OPTION)
+                : performance.performanceData?.summary?.total}
+            </span>
+          </p>
+          <p>
+            Average:{" "}
+            <span className="text-[#F29393] font-montserrat-bold">
+              {performance.isUseCurrency
+                ? Number(
+                    performance.performanceData?.summary?.average
+                  ).toLocaleString("id-ID", CURRENCY_OPTION)
+                : performance.performanceData?.summary?.average}
             </span>
           </p>
         </div>
